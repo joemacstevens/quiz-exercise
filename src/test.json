@@ -1,0 +1,83 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "qid": "f1525223-5a87-494a-b122-14166724907f",
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Typically, how many keys are on a piano?",
+            "correct_answer": ["88"],
+            "incorrect_answers": [
+                "24",
+                "12",
+                "96"
+            ]
+        },
+        {
+            "qid": "c9a2b100-6d22-411c-9da1-97ed0f6e8fbc",
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Pink Floyd made this song for their previous lead singer Syd Barrett.",
+            "correct_answer": ["Shine On You Crazy Diamond"],
+            "incorrect_answers": [
+                "Wish You Were Here",
+                "Have A Cigar",
+                "Welcome to the Machine"
+            ]
+        },
+        {
+            "qid": "0624923d-0d6e-4dc7-a1d4-0083c3f655e1",
+            "category": "Entertainment: Music",
+            "type": "boolean",
+            "difficulty": "medium",
+            "question": "EDM label Monstercat signs tracks instead of artists.",
+            "correct_answer": ["True"],
+            "incorrect_answers": [
+                "False"
+            ]
+        },
+        {
+            "qid": "c9078741-3711-4c87-bc6c-9520e3c46cd5",
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Who performed the guitar solo on Michael Jackson's hit Beat It?",
+            "correct_answer": ["Eddie Van Halen"],
+            "incorrect_answers": [
+                "Steve Vai",
+                "Kirk Hammett",
+                "Zakk Wylde"
+            ]
+        },
+        {
+            "qid": "36e036d5-4de2-4cef-b6da-3edae710f91d",
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What country did Shirley Bassey originate from?",
+            "correct_answer": ["Wales"],
+            "incorrect_answers": [
+                "America",
+                "England",
+                "Canada"
+            ]
+        },
+        {
+            "qid": "1598cfdf-57ad-46d5-93cd-711d5df5d7e1",
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "extreme",
+            "question": "What samples are used in the song Juicy, by The Notorious B.I.G.?",
+            "correct_answer": [
+                "Juicy Fruit",
+                "Rappin Duke"],
+            "incorrect_answers": [
+                "Super Freak",
+                "Mystic Brew",
+                "Outside Love"
+            ]
+        }
+    ]
+}
