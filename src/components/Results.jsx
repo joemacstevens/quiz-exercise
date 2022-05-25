@@ -55,7 +55,11 @@ export const Results = (props) => {
             </div>
             <div>Previous Scores</div>
             {showScores().map((item, index) => {
+                if(index < 5) {
                 return <div key={index}>{JSON.parse(item).score} {new Date(JSON.parse(item).time).getMonth()} / {new Date(JSON.parse(item).time).getDate()}  </div>
+            } else {
+                return null;
+            }
             })}
             </Card>
             </Container>
