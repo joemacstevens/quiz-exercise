@@ -38,6 +38,9 @@ background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
   height: 35vh;
   position: fixed;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 `;
 

@@ -1,11 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {QuestionHeading, Card, Hero, Container} from './Quiz';
+import {Badge} from './Badge';
+import { css, keyframes } from '@emotion/react'
+import styled from '@emotion/styled';
 
+export const Score = styled('div')`
+  display: flex;
+  justify-content: center;
+  font-family: 'Abril Fatface', cursive;`
 
 export const Results = (props) => {
-
- 
 
     const showScores = () => {
         let values = [],
@@ -30,12 +36,19 @@ export const Results = (props) => {
 
     return (
         <Fragment>
+                   <Hero>
+                   <div css={css`width:170px;`}>
+                       <Badge score={props.results.score}/></div>
+                   <div></div>
+                   {props.results.score >= props.topscore ? <div>New High Score!</div> : null}
+                   </Hero>
+        <Container>
+          <Card>
             <div>
                 <div>Results</div>
                 <div>Correct: {props.results.correct}</div>
                 <div>Incorrect: {props.results.incorrect}</div>
-                <div>{props.results.score}%</div>
-                {props.results.score >= props.topscore ? <div>New High Score!</div> : null}
+            
             </div>
             <div>
                 <Link to="/">Start Again</Link>
@@ -44,6 +57,8 @@ export const Results = (props) => {
             {showScores().map((item, index) => {
                 return <div key={index}>{JSON.parse(item).score} {new Date(JSON.parse(item).time).getMonth()} / {new Date(JSON.parse(item).time).getDate()}  </div>
             })}
+            </Card>
+            </Container>
         </Fragment>
     )
 }

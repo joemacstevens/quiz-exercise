@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Fragment, useEffect, useState, useRef } from 'react';
 import uuid from 'react-uuid';
-import { css } from '@emotion/react'
+import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled';
 
 export const Timer = styled('div')`
@@ -21,7 +21,7 @@ export const Answers = (props) => {
     const [options, setOptions] = useState([]);
     const [answered, setAnswered] = useState(false);
     const [result, setResult] = useState(false);
-    const [counter, setCounter] = useState(90);
+    const [counter, setCounter] = useState(20);
 
     const intervalRef = useRef();
     intervalRef.current = counter
@@ -63,7 +63,7 @@ export const Answers = (props) => {
     }
 
     useEffect(() => {
-        setCounter(10)
+        setCounter(20);
         const _timer = setInterval(() => {
             if (intervalRef.current == 0) {
                 clearInterval(_timer);
@@ -81,15 +81,15 @@ export const Answers = (props) => {
             <Timer>
                 <div css={css`position:absolute`}>{counter}</div>
                 <svg css={css`width: 60px;
-height: 60px;
-margin-top: 0;`}>
+                    height: 60px;
+                    margin-top: 0;`}>
                     <circle css={css`  stroke-dasharray: 203px;
-stroke-dashoffset: 0px;
-stroke-linecap: round;
-stroke-width: 5px;
-stroke: white;
-fill: white;`} r="25" cx="30" cy="30">
-
+                    stroke-dashoffset: 0px;
+                    stroke-linecap: round;
+                    stroke-width: 5px;
+                    stroke: orange;
+                    fill: white;
+                    `} r="25" cx="30" cy="30">
                     </circle>
                 </svg>
 
