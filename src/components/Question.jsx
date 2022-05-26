@@ -2,7 +2,7 @@
 import { Fragment, useEffect, useState, useRef } from 'react';
 import { Answers } from './Answers';
 import { QuestionHeading } from './Quiz';
-import { css } from '@emotion/react'
+import { css,useTheme } from '@emotion/react'
 import styled from '@emotion/styled';
 
 
@@ -42,6 +42,8 @@ export const Question = (props) => {
       return false
     }
   }
+
+  const theme = useTheme();
 
   useEffect(() => {
 

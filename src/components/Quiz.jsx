@@ -4,7 +4,7 @@ import useFetch from 'react-fetch-hook';
 import { useNavigate } from 'react-router-dom';
 import { Question } from './Question';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react'
+import { css, useTheme } from '@emotion/react'
 
 
 export const QuestionHeading = styled('header')`
@@ -34,7 +34,7 @@ export const Container = styled('div')`
 ;`;
 
 export const Hero = styled('div')`
-background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+background: linear-gradient(90deg, #7fa89f 0%, #9bbcbb 100%);
   clip-path: ellipse(85% 100% at 50% 0%);
   height: 35vh;
   position: fixed;
@@ -65,6 +65,7 @@ export const Quiz = (props) => {
   const [currentQuestion, setCurrent] = useState(0);
 
   let navigate = useNavigate();
+  const theme = useTheme();
 
   const onUpdate = (correct) => {
     props.update(correct);

@@ -4,7 +4,22 @@ import { Routes, Route } from 'react-router-dom';
 import { Quiz } from './components/Quiz';
 import { Results } from './components/Results';
 import { Start } from './components/Start';
-import { Global, css} from '@emotion/react';
+import { Global, css, ThemeProvider } from '@emotion/react';
+
+
+const theme = {
+  colors: {
+      gravel: "#464047",
+sea: "#7fa89f",
+champagne: "#f9e6d4",
+dove: "#646464",
+shadow_green: "#9bbcbb",
+sorrell_brown: "#c7a084",
+pumice: "#bbc2ba",
+brandy: "#dbb490",
+arrowtown: "#927e6a",
+  }
+}
 
 
 
@@ -15,11 +30,37 @@ const GlobalStyles = css`
     height: 100vh;
     margin: 0;
     padding: 0;
-    background: #fafafa;
+    background: ${theme.colors.gravel};
   }
   
   a { 
     text-decoration: none;
+    color: ${theme.colors.sea};
+  }
+
+  button {
+    border: none;
+    border-radius: 50px;
+    width: 25%;
+    padding: 1em;
+    background: ${theme.colors.sea};
+    color: ${theme.colors.champagne};
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background: ${theme.colors.champagne};
+      color: ${theme.colors.sea};
+    }
+    @media (max-width: 450px) { 
+      width: 60%;
+  }
+
+
+
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Abril Fatface', cursive;
   }
   `
   
@@ -79,11 +120,14 @@ useEffect(() => {
             <Global
       styles={GlobalStyles}
     />
+    <ThemeProvider theme={theme}>
     <Routes>
       <Route path="/" element={<Start  reset={resetResults} />}/>
       <Route path="question" element={<Quiz update={updateResults} />} />
       <Route path="results" element={<Results results={results} store={storeResults} topscore={topscore}/>} />
     </Routes>
+    </ThemeProvider>
     </Fragment>
+   
   );
 }
