@@ -4,7 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import { Quiz } from './components/Quiz';
 import { Results } from './components/Results';
 import { Start } from './components/Start';
-import { Global, css} from '@emotion/react'
+import { Global, css} from '@emotion/react';
+
 
 
 const GlobalStyles = css`
@@ -15,7 +16,13 @@ const GlobalStyles = css`
     margin: 0;
     padding: 0;
     background: #fafafa;
-  }`
+  }
+  
+  a { 
+    text-decoration: none;
+  }
+  `
+  
 
 export default function App() {
 
