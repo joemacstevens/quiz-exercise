@@ -7,7 +7,7 @@ import { Start } from './components/Start';
 import { Global, css, ThemeProvider } from '@emotion/react';
 
 
-const theme = {
+export const theme = {
   colors: {
       gravel: "#464047",
 sea: "#7fa89f",
@@ -31,36 +31,63 @@ const GlobalStyles = css`
     margin: 0;
     padding: 0;
     background: ${theme.colors.gravel};
+    
+  }
+
+  label { 
+    padding: .8em;
+    display: block;
   }
   
+  label span { 
+   margin-left: .2em;
+   display: inline-block;
+  }
+
+  label, p, strong {
+    color: ${theme.colors.champagne};
+  }
   a { 
     text-decoration: none;
     color: ${theme.colors.sea};
   }
 
+  strong {
+    font-weight: 600;
+    color: ${theme.colors.pumice};
+  }
+
   button {
     border: none;
     border-radius: 50px;
-    width: 25%;
-    padding: 1em;
+    font-family: 'Poppins', sans-serif;
+    width: 50%;
+    padding: .5em;
     background: ${theme.colors.sea};
-    color: ${theme.colors.champagne};
+    color: ${theme.colors.gravel};
+    text-transform: uppercase;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: 1em;
     transition: all 0.2s ease-in-out;
     &:hover {
       background: ${theme.colors.champagne};
       color: ${theme.colors.sea};
     }
+    &:focus {
+      background: ${theme.colors.brandy};
+      color: ${theme.colors.champagne};
+    }
     @media (max-width: 450px) { 
       width: 60%;
   }
-
-
 
   }
 
   h1,h2,h3,h4,h5,h6 {
     font-family: 'Abril Fatface', cursive;
+    color: ${theme.colors.champagne};
   }
   `
   

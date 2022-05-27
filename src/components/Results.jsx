@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, Fragment, useState } from 'react';
+import { useEffect, Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import {QuestionHeading, Card, Hero, Container} from './Quiz';
+import { Hero, Container} from './Quiz';
 import {Badge} from './Badge';
-import { css, keyframes } from '@emotion/react'
+import { css, useTheme } from '@emotion/react'
 import styled from '@emotion/styled';
+import Lottie from "lottie-react";
+import celebrateAnimation from "../celebration.json";
+import {Grid, GridAside , GridItem} from './Grid';
 
 export const Score = styled('div')`
   display: flex;
@@ -12,6 +15,9 @@ export const Score = styled('div')`
   font-family: 'Abril Fatface', cursive;`
 
 export const Results = (props) => {
+
+    const celebrateRef = useRef();
+    const theme = useTheme();
 
     const showScores = () => {
         let values = [],
@@ -36,33 +42,47 @@ export const Results = (props) => {
 
     return (
         <Fragment>
+            <Grid>
+                <GridAside>
                    <Hero>
-                   <div css={css`width:170px;`}>
-                       <Badge score={props.results.score}/></div>
+                   <Lottie lottieRef={celebrateRef} animationData={celebrateAnimation} autoplay={true}/>
+                   <div css={css`width:170px; position: absolute;`}>
+                   {props.results.score <= props.topscore ? <h1 css={css`color: ${theme.colors.gravel}`}>New High Score!</h1> : null}
+                       <Badge score={props.results.score}/>
+                      
+                       </div>
                    <div></div>
-                   {props.results.score >= props.topscore ? <div>New High Score!</div> : null}
+                   
                    </Hero>
-        <Container>
-          <Card>
-            <div>
-                <div>Results</div>
-                <div>Correct: {props.results.correct}</div>
-                <div>Incorrect: {props.results.incorrect}</div>
+                   </GridAside>
+                   <GridItem>
+        <Container css={css`width: 100%;`}>
+         
+        <div css={css`width: 100%;  display: flex; flex-direction: column`}>
+                <h1>Results</h1>
+                <p>Correct: {props.results.correct}<br />
+                Incorrect: {props.results.incorrect}</p>
             
+           
+                <Link to="/"><button>Start Again</button></Link>
             </div>
-            <div>
-                <Link to="/">Start Again</Link>
-            </div>
-            <div>Previous Scores</div>
+            <h3>Previous Scores</h3>
+            <ul css={css`
+                margin-left: 1em;
+                padding: 0;
+                color: ${theme.colors.shadow_green};
+            `}>
             {showScores().map((item, index) => {
                 if(index < 5) {
-                return <div key={index}>{JSON.parse(item).score} {new Date(JSON.parse(item).time).getMonth()} / {new Date(JSON.parse(item).time).getDate()}  </div>
+                return <li key={index}>{JSON.parse(item).score} {new Date(JSON.parse(item).time).toLocaleTimeString()} / {new Date(JSON.parse(item).time).toDateString()}  </li>
             } else {
                 return null;
             }
             })}
-            </Card>
+        </ul>
             </Container>
+            </GridItem>
+            </Grid>
         </Fragment>
     )
 }

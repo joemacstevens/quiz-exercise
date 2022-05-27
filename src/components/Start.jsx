@@ -4,42 +4,9 @@ import { Link } from 'react-router-dom';
 import { css,useTheme } from '@emotion/react'
 import tape from './images/tape.png';
 import styled from '@emotion/styled';
+import {Grid, GridImage, GridItem} from './Grid';
 
 
-export const Grid = styled('section')`
-    max-width: 1024px;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    margin: 0 auto;
-
-    @media (max-width: 450px) { 
-        grid-template-columns: repeat(1, 1fr);
-    }
-    
-`
-export const GridItem = styled('div')` 
-    padding: .5em;
-    display: flex;
-    flex-direction: column;
-    align-items: self-start;
-    justify-content: center;
-    max-width: 100vw;
-    @media (max-width: 450px) { 
-        justify-content: start;
-        text-align: center;
-    }
-`
-
-export const GridImage = styled('div')` 
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`
 export const Start = (props) => {
 
     const theme = useTheme();
@@ -77,6 +44,7 @@ export const Start = (props) => {
            
         }`}>&#9836; Musica </h1>
         <p css={css` 
+          font-size: 1.5em;
           @media (max-width: 450px) { text-align: center; margin-top: -50px; text-align: center;}
           color: ${theme.colors.champagne};
         `}>Test your knowledge of music.</p>

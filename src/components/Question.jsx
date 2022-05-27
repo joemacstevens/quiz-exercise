@@ -1,14 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { Fragment, useEffect, useState, useRef } from 'react';
 import { Answers } from './Answers';
-import { QuestionHeading } from './Quiz';
 import { css,useTheme } from '@emotion/react'
-import styled from '@emotion/styled';
-
-
 
 export const Question = (props) => {
-  const { question, onUpdate, count } = props;
+  const { question, onUpdate, count,expired } = props;
   const [answer, setAnswer] = useState([]);
   const [questionType, setQuestionType] = useState('single');
 
@@ -57,9 +53,21 @@ export const Question = (props) => {
 
   return (
     <Fragment>
-      <QuestionHeading>
-      <p>Question {count}/6</p> 
-        <h3>{question.question}</h3></QuestionHeading>
+     <div css={css`@media (max-width: 450px){
+       text-align:center;
+       width: 100%;
+     }`}>
+      <strong>Question {count} | 6</strong> 
+      </div>
+      <header css={css`@media (max-width: 450px){
+        padding: 0 1em;
+      }`}>
+        <h1>{question.question}</h1>
+        </header>
+        <div css={css`
+          margin-bottom: 1em;
+          width: 100%;
+        `}>
       <Answers
         options={question.correct_answer.concat(props.question.incorrect_answers)}
         questionType={questionType}
@@ -68,8 +76,9 @@ export const Question = (props) => {
         onNext={props.onNext}
         onCheckAnswer={checkAnswer}
         selectedAnswer={answer}
+        expired={expired}
       />
-
+</div>
      </Fragment>
   )
 

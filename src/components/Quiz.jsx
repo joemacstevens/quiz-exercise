@@ -4,71 +4,65 @@ import useFetch from 'react-fetch-hook';
 import { useNavigate } from 'react-router-dom';
 import { Question } from './Question';
 import styled from '@emotion/styled';
-import { css, useTheme } from '@emotion/react'
-
-
-export const QuestionHeading = styled('header')`
-  font-size: 1.2em;
-  font-family: 'Abril Fatface', cursive;
-  background: rgba( 255, 255, 255, 0.6);
-  box-shadow: 0 2px 20px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
-  padding: 1em;
-`
-export const Card = styled('div')` 
-
-  margin-top: 27vh;
-  text-align: center;
-  max-width: 400px;
-  height: 15vh;
-`;
+import Lottie from "lottie-react";
+import correctAnimation from "../correct.json";
+import {Grid, GridAside , GridItem} from './Grid';
 
 export const Container = styled('div')` 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
 ;`;
 
 export const Hero = styled('div')`
-background: linear-gradient(90deg, #7fa89f 0%, #9bbcbb 100%);
-  clip-path: ellipse(85% 100% at 50% 0%);
-  height: 35vh;
-  position: fixed;
-  width: 100vw;
+background: #7fa89f;
+  clip-path: ellipse(85% 80% at 0% 50%);
+  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 450px) {
+    clip-path: ellipse(85% 100% at 50% 0%);
+    height: 100%;
+  }
 }
 `;
 
-export const Timer = styled('div')`
-position: absolute;
-z-index: 10;
-margin-top: -22px;
-height: 40px;
-width: 35vw;
-display: flex;
-justify-content: center;
-align-items: center;
-`
 export const Countdown = styled('div')`
-  font-size: 2em;`;
+  font-size: 20em;
+  color: #f9e6d4;
+  position: absolute;
+  margin-left: -100px;
+  @media (max-width: 450px) { 
+    font-size: 15em;
+    margin-left: 0;
+  }
+  `
 
 const url = "http://demo6417400.mockable.io/music";
 
 export const Quiz = (props) => {
   const { isLoading, error, data } = useFetch(url);
   const [currentQuestion, setCurrent] = useState(0);
+  const [counter, setCounter] = useState(20);
+  const [expired, setExpired] = useState(false);
+  const [correct, setCorrect] = useState(false);
+
 
   let navigate = useNavigate();
-  const theme = useTheme();
+
+
+  const intervalRef = useRef();
+  const correctRef = useRef();
+
+  intervalRef.current = counter
 
   const onUpdate = (correct) => {
     props.update(correct);
+    setCorrect(correct);
+    setExpired(true);
   }
 
   const onNext = () => {
@@ -79,23 +73,58 @@ export const Quiz = (props) => {
     }
   }
 
+  const Status = () => { 
+   if (correct) { 
+      return <div>&#10003;</div>
+    } else {
+      return !expired ? <div>{counter}</div> : <div>&#10007;</div>
+    }
+  }
+
+useEffect(() => {
+  if (correct){
+    correctRef.current.goToAndPlay(0)
+  }
+},[correct])
+
+  useEffect(() => {
+    setCounter(60);
+    setExpired(false);
+    setCorrect(false);
+    const _timer = setInterval(() => {
+        if (intervalRef.current == 0) {
+            clearInterval(_timer);
+            setExpired(true);
+            
+        } else {
+            setCounter(intervalRef.current - 1);
+        }
+    }, 1000);
+    return () => clearInterval(_timer); // clean up 
+  },[currentQuestion])
+
   if (isLoading) {
     return <div>Loading...</div>;
   } else {
     return (
       <Fragment>
-        <Hero></Hero>
+        <Grid>
+          <GridAside>
+        <Hero>
+        <Lottie lottieRef={correctRef} animationData={correctAnimation} autoplay={false}/>
+        
+        <Countdown><Status /></Countdown> 
+        </Hero>
+        </GridAside>
+        <GridItem>
         <Container>
-          <Card>
-
             <Question
               question={data.results[currentQuestion]}
               count={currentQuestion + 1}
-              onUpdate={onUpdate} onNext={onNext} />
-          </Card>
-
-
+              onUpdate={onUpdate} onNext={onNext} expired={expired}/>
         </Container>
+        </GridItem>
+        </Grid>
       </Fragment>
     )
   }
