@@ -23,8 +23,6 @@ export const theme = {
 
 
 export default function App() {
-
-
   const [results, setResults] = useState({ correct: 0, incorrect: 0, score: 0 });
   const [topscore, setTopScore] = useState(0);
 
