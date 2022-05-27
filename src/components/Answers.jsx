@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Fragment, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
-import { css, keyframes } from '@emotion/react'
+import { css } from '@emotion/react'
 
 export const Answers = (props) => {
     const [options, setOptions] = useState([]);

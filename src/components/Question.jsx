@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { Fragment, useEffect, useState, useRef } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Answers } from './Answers';
-import { css,useTheme } from '@emotion/react'
+import { css} from '@emotion/react'
 
 export const Question = (props) => {
-  const { question, onUpdate, count,expired } = props;
+  const { question, onUpdate, count, expired } = props;
   const [answer, setAnswer] = useState([]);
   const [questionType, setQuestionType] = useState('single');
 
@@ -21,25 +21,23 @@ export const Question = (props) => {
   }
 
   const checkAnswer = () => {
-    
+
     if (answer.length !== question.correct_answer.length) {
       return false;
-    } 
+    }
 
     const correct = answer.every(item => {
       return question.correct_answer.includes(item);
     })
 
     if (correct) {
-     onUpdate(true);
+      onUpdate(true);
       return true
     } else {
       onUpdate(false);
       return false
     }
   }
-
-  const theme = useTheme();
 
   useEffect(() => {
 
@@ -53,33 +51,33 @@ export const Question = (props) => {
 
   return (
     <Fragment>
-     <div css={css`@media (max-width: 450px){
+      <div css={css`@media (max-width: 450px){
        text-align:center;
        width: 100%;
      }`}>
-      <strong>Question {count} | 6</strong> 
+        <strong>Question {count} | 6</strong>
       </div>
       <header css={css`@media (max-width: 450px){
         padding: 0 1em;
       }`}>
         <h1>{question.question}</h1>
-        </header>
-        <div css={css`
+      </header>
+      <div css={css`
           margin-bottom: 1em;
           width: 100%;
         `}>
-      <Answers
-        options={question.correct_answer.concat(props.question.incorrect_answers)}
-        questionType={questionType}
-        qid={question.qid}
-        onAnswer={handleAnswer}
-        onNext={props.onNext}
-        onCheckAnswer={checkAnswer}
-        selectedAnswer={answer}
-        expired={expired}
-      />
-</div>
-     </Fragment>
+        <Answers
+          options={question.correct_answer.concat(props.question.incorrect_answers)}
+          questionType={questionType}
+          qid={question.qid}
+          onAnswer={handleAnswer}
+          onNext={props.onNext}
+          onCheckAnswer={checkAnswer}
+          selectedAnswer={answer}
+          expired={expired}
+        />
+      </div>
+    </Fragment>
   )
 
 }

@@ -1,18 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { css,useTheme } from '@emotion/react'
 import tape from './images/tape.png';
-import styled from '@emotion/styled';
-import {Grid, GridImage, GridItem} from './Grid';
+import {Grid, GridImage, GridItem} from './styles/Grid';
 
 
-export const Start = (props) => {
+export const Start = ({reset}) => {
 
     const theme = useTheme();
 
     useEffect(() => {
-        props.reset();
+        reset();
     }, []);
 
     return (

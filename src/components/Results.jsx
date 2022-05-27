@@ -1,20 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Hero, Container} from './Quiz';
-import {Badge} from './Badge';
+import Disk from './images/disk.png';
 import { css, useTheme } from '@emotion/react'
-import styled from '@emotion/styled';
 import Lottie from "lottie-react";
 import celebrateAnimation from "../celebration.json";
-import {Grid, GridAside , GridItem} from './Grid';
+import {Grid, GridAside , GridItem} from './styles/Grid';
+import { ResHero,Container, Score, Saved} from './styles/Styles';
 
-export const Score = styled('div')`
-  display: flex;
-  justify-content: center;
-  font-family: 'Abril Fatface', cursive;`
-
-export const Results = (props) => {
+export const Results = ({store, results, topscore}) => {
 
     const celebrateRef = useRef();
     const theme = useTheme();
@@ -36,36 +30,34 @@ export const Results = (props) => {
     }
 
     useEffect(() => {
-        props.store(new Date().getTime());
-       
+        store(new Date().getTime());
     }, []);
 
     return (
         <Fragment>
             <Grid>
-                <GridAside>
-                   <Hero>
+                <GridAside >
+                   <ResHero>
                    <Lottie lottieRef={celebrateRef} animationData={celebrateAnimation} autoplay={true}/>
-                   <div css={css`width:170px; position: absolute;`}>
-                   {props.results.score <= props.topscore ? <h1 css={css`color: ${theme.colors.gravel}`}>New High Score!</h1> : null}
-                       <Badge score={props.results.score}/>
-                      
-                       </div>
+
+                        <Saved>
+                       <img src={Disk} alt="disk" css={css`width:100%; position: absolute;`}/>
+                      <Score>{results.score}</Score>
+                      </Saved>
                    <div></div>
                    
-                   </Hero>
+                   </ResHero>
                    </GridAside>
                    <GridItem>
         <Container css={css`width: 100%;`}>
          
         <div css={css`width: 100%;  display: flex; flex-direction: column`}>
-                <h1>Results</h1>
-                <p>Correct: {props.results.correct}<br />
-                Incorrect: {props.results.incorrect}</p>
-            
-           
+                <div>{results.score >= topscore ? <h1 css={css`color: ${theme.colors.champagne }; margin-bottom:0`}>New High Score!</h1> : <h1 css={css`color: ${theme.colors.champagne }; margin-bottom:0`}>Your Score!</h1>}</div>
+                <p>Correct: {results.correct}<br />
+                Incorrect: {results.incorrect}</p>
                 <Link to="/"><button>Start Again</button></Link>
             </div>
+            <div css={css`margin-left: 1em`}>
             <h3>Previous Scores</h3>
             <ul css={css`
                 margin-left: 1em;
@@ -80,6 +72,7 @@ export const Results = (props) => {
             }
             })}
         </ul>
+        </div>
             </Container>
             </GridItem>
             </Grid>
